@@ -8,4 +8,8 @@ class Area extends Model
 {
     //
     protected $guarded=[];
+
+    public function prestamista(){
+        return $this->hasMany(Prestamista::class);
+    }
 }
