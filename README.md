@@ -1,6 +1,6 @@
 # Sistema de Inventario
 
-Este proyecto es una aplicación web que permite gestionar una lista de productos, sus propiedades y sus precios.
+Este proyecto es un sistema de inventario que permite registrar productos, categorias, prestamistas, para poder realizar un seguimiento de los productos que se prestan
 
 ### local admin
 
