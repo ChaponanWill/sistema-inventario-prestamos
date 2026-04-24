@@ -40,7 +40,7 @@ class ProductoResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+                    RelationManagers\PrestamosRelationManager::class,
         ];
     }
 
