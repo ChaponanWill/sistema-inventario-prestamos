@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Producto extends Model
 {
@@ -16,5 +17,10 @@ class Producto extends Model
     // relación de belongsTo con Categoria
     public function categoria():BelongsTo{
         return $this->belongsTo(Categoria::class);
+    }
+
+    // relación de hasMany con Entrada
+    public function entradas():HasMany{
+        return $this->hasMany(Entrada::class);
     }
 }

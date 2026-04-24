@@ -1,33 +1,28 @@
 <?php
 
-namespace App\Filament\Resources\Productos\Tables;
+namespace App\Filament\Resources\Entradas\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class ProductosTable
+class EntradasTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('nombre')
+                TextColumn::make('fecha')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('producto.nombre')
                     ->searchable(),
-                ImageColumn::make('image')
-                    ->disk('public')
-                    ->label('Imagen'),
                 TextColumn::make('cantidad')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('unidad.nombre_corto')
-                    ->searchable(),
-                TextColumn::make('categoria.nombre')
-                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

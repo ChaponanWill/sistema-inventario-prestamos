@@ -1,31 +1,25 @@
 <?php
 
-namespace App\Filament\Resources\Productos\Schemas;
+namespace App\Filament\Resources\Entradas\Schemas;
 
-use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
-class ProductoInfolist
+class EntradaInfolist
 {
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
-                TextEntry::make('nombre'),
+                TextEntry::make('fecha')
+                    ->date(),
+                TextEntry::make('producto.id')
+                    ->label('Producto'),
+                TextEntry::make('cantidad')
+                    ->numeric(),
                 TextEntry::make('descripcion')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                ImageEntry::make('image')
-                    ->label('Imagen')
-                    ->disk('public')
-                    ->placeholder('-'),
-                TextEntry::make('cantidad')
-                    ->numeric(),
-                TextEntry::make('unidad.nombre_corto')
-                    ->label('Unidad'),
-                TextEntry::make('categoria.nombre')
-                    ->label('Categoria'),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),
