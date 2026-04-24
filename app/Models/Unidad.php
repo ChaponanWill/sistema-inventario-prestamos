@@ -3,8 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Unidad extends Model
 {
     protected $guarded = [];
+    // Relación de muchos con Producto
+    public function producto(): HasMany {
+        return $this->hasMany(Producto::class);
+    }
 }
