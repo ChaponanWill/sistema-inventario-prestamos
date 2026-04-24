@@ -23,4 +23,8 @@ class Producto extends Model
     public function entradas():HasMany{
         return $this->hasMany(Entrada::class);
     }
+    // relación de hasMany con Prestamo
+    public function prestamos():HasMany{
+        return $this->hasMany(Prestamo::class);
+    }
 }
