@@ -21,7 +21,8 @@ class EntradaForm
                     ->required(),
                 TextInput::make('cantidad')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->rules(['integer', 'min:1']),
                 Textarea::make('descripcion')
                     ->default(null)
                     ->columnSpanFull(),
