@@ -26,6 +26,7 @@ class PrestamosTable
                 TextColumn::make('fecha_devolucion')
                     ->date()
                     ->sortable(),
+                //  Combinar el DNI + primer nombre y apellido del prestamista
                 TextColumn::make('prestamista.dni')
                     ->getStateUsing(function ($record) {
                         return $record->prestamista->dni . ' - ' . $record->prestamista->primer_nombre . ' ' . $record->prestamista->primer_apellido;

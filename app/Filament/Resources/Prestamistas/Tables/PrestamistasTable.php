@@ -20,12 +20,12 @@ class PrestamistasTable
                     ->searchable(),
                 TextColumn::make('primer_nombre')
                     ->searchable(),
-                TextColumn::make('segundo_nombre')
-                    ->searchable(),
+                // TextColumn::make('segundo_nombre')
+                //     ->searchable(),
                 TextColumn::make('primer_apellido')
                     ->searchable(),
-                TextColumn::make('segundo_apellido')
-                    ->searchable(),
+                // TextColumn::make('segundo_apellido')
+                //     ->searchable(),
                 IconColumn::make('estado')
                     ->boolean(),
                 TextColumn::make('area.nombre')

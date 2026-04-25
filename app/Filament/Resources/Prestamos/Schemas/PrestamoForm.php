@@ -7,7 +7,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
-
+use Illuminate\Database\Eloquent\Builder;
 class PrestamoForm
 {
     public static function configure(Schema $schema): Schema
@@ -38,8 +38,9 @@ class PrestamoForm
                         };
                     }),
                 DatePicker::make('fecha_devolucion'),
+                // Solo prestamistas con activo 1
                 Select::make('prestamista_id')
-                    ->relationship('prestamista', 'dni')
+                    ->relationship('prestamista', 'dni', fn(Builder $query, $get)=>$query->where('estado',1)->orWhere('id', $get('prestamista_id')))
                     ->searchable()
                     ->getOptionLabelFromRecordUsing(fn ($record)=>
                         $record->dni . ' - ' . $record->primer_nombre . ' ' . $record->primer_apellido

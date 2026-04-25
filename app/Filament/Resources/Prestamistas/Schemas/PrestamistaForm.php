@@ -6,6 +6,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Builder;
 
 class PrestamistaForm
 {
@@ -27,7 +28,9 @@ class PrestamistaForm
                     ->default(1)
                     ->required(),
                 Select::make('area_id')
-                    ->relationship('area', 'nombre')
+                    ->relationship('area', 'nombre', fn(Builder $query, $get)=> 
+                        $query->where('estado',1)->orWhere('id',($get('area_id')))
+                    )
                     ->required(),
             ]);
     }

@@ -21,7 +21,10 @@ class PrestamoInfolist
                     ->date()
                     ->placeholder('-'),
                 TextEntry::make('prestamista.dni')
-                    ->label('Prestamista'),
+                    ->label('Prestamista')
+                    ->getStateUsing(function ($record) {
+                        return $record->prestamista->dni . ' - ' . $record->prestamista->primer_nombre . ' ' . $record->prestamista->primer_apellido;
+                    }),
                 TextEntry::make('descripcion')
                     ->placeholder('-')
                     ->columnSpanFull(),
