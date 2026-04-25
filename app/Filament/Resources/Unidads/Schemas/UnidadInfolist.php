@@ -13,12 +13,6 @@ class UnidadInfolist
             ->components([
                 TextEntry::make('titulo'),
                 TextEntry::make('nombre_corto'),
-                TextEntry::make('created_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('updated_at')
-                    ->dateTime()
-                    ->placeholder('-'),
             ]);
     }
 }

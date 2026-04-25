@@ -20,14 +20,9 @@ class PrestamistaInfolist
                 TextEntry::make('segundo_apellido'),
                 IconEntry::make('estado')
                     ->boolean(),
-                TextEntry::make('area.id')
+                TextEntry::make('area.nombre')
                     ->label('Area'),
-                TextEntry::make('created_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('updated_at')
-                    ->dateTime()
-                    ->placeholder('-'),
+                
             ]);
     }
 }

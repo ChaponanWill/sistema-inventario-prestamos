@@ -41,6 +41,9 @@ class PrestamoForm
                 Select::make('prestamista_id')
                     ->relationship('prestamista', 'dni')
                     ->searchable()
+                    ->getOptionLabelFromRecordUsing(fn ($record)=>
+                        $record->dni . ' - ' . $record->primer_nombre . ' ' . $record->primer_apellido
+                    )
                     ->required(),
                 Textarea::make('descripcion')
                     ->default(null)

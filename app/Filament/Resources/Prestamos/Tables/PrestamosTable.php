@@ -27,6 +27,9 @@ class PrestamosTable
                     ->date()
                     ->sortable(),
                 TextColumn::make('prestamista.dni')
+                    ->getStateUsing(function ($record) {
+                        return $record->prestamista->dni . ' - ' . $record->prestamista->primer_nombre . ' ' . $record->prestamista->primer_apellido;
+                    })
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
