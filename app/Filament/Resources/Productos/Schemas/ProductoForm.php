@@ -7,6 +7,7 @@ use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
 class ProductoForm
@@ -25,12 +26,11 @@ class ProductoForm
                     ->image()
                     ->directory('productos')
                     ->disk('public')
-
-
-
                     ->image(),
                 Hidden::make('cantidad')
                     ->default(0),
+                TextEntry::make('cantidad')
+                    ->state(fn ($record) => $record?->cantidad ?? 0),
                 Select::make('unidad_id')
                     ->relationship('unidad', 'nombre_corto')
                     ->required(),

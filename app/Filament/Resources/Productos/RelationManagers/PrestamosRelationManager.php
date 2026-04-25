@@ -20,6 +20,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class PrestamosRelationManager extends RelationManager
 {
@@ -36,7 +37,7 @@ class PrestamosRelationManager extends RelationManager
                     ->numeric(),
                 DatePicker::make('fecha_devolucion'),
                 Select::make('prestamista_id')
-                    ->relationship('prestamista', 'id')
+                    ->relationship('prestamista', 'dni',fn(Builder $query, $get)=>$query->where('estado',1)->orWhere('id', $get('prestamista_id')))
                     ->required(),
                 Textarea::make('descripcion')
                     ->default(null)
@@ -55,17 +56,17 @@ class PrestamosRelationManager extends RelationManager
                 TextEntry::make('fecha_devolucion')
                     ->date()
                     ->placeholder('-'),
-                TextEntry::make('prestamista.id')
+                TextEntry::make('prestamista.dni')
+                    ->getStateUsing(function ($record) {
+                        return $record->prestamista->dni . ' - ' . $record->prestamista->primer_nombre . ' ' . $record->prestamista->primer_apellido;
+                    })
                     ->label('Prestamista'),
                 TextEntry::make('descripcion')
+                    ->label('Descripción')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                TextEntry::make('created_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('updated_at')
-                    ->dateTime()
-                    ->placeholder('-'),
+
+
             ]);
     }
 
@@ -83,7 +84,10 @@ class PrestamosRelationManager extends RelationManager
                 TextColumn::make('fecha_devolucion')
                     ->date()
                     ->sortable(),
-                TextColumn::make('prestamista.id')
+                TextColumn::make('prestamista.dni')
+                    ->getStateUsing(function ($record){
+                        return $record->prestamista->dni . ' - ' . $record->prestamista->primer_nombre . ' ' . $record->prestamista->primer_apellido;
+                    })
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -99,17 +103,17 @@ class PrestamosRelationManager extends RelationManager
             ])
             ->headerActions([
                 CreateAction::make(),
-                AssociateAction::make(),
+                // AssociateAction::make(),
             ])
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
-                DissociateAction::make(),
+                // DissociateAction::make(),
                 DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DissociateBulkAction::make(),
+                    // DissociateBulkAction::make(),
                     DeleteBulkAction::make(),
                 ]),
             ]);
