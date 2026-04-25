@@ -64,14 +64,9 @@ class EditEntrada extends EditRecord
             DeleteAction::make()
             ->after(function ($record) {
 
-                if ($record->producto) {
-                    $stock = $record->producto->cantidad - $record->cantidad;
-
-                    $record->producto->update([
-                        'cantidad' => max(0, $stock),
-                    ]);
+                if($record->producto){
+                    $record->producto->decrement('cantidad', $record->cantidad);
                 }
-
             }),
         ];
     }
