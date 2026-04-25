@@ -33,11 +33,19 @@ class PrestamosRelationManager extends RelationManager
                 DatePicker::make('fecha_prestamo')
                     ->required(),
                 TextInput::make('cantidad')
+                    ->rules(['integer', 'min:1'])
+                    // No dejar insertar números superiores al stock disponible
+                    ->maxValue(fn ($component) => $component->getContainer()->getLivewire()->getOwnerRecord()->cantidad)
                     ->required()
                     ->numeric(),
                 DatePicker::make('fecha_devolucion'),
                 Select::make('prestamista_id')
-                    ->relationship('prestamista', 'dni',fn(Builder $query, $get)=>$query->where('estado',1)->orWhere('id', $get('prestamista_id')))
+                    ->relationship('prestamista', 'dni', fn(Builder $query, $get) => $query->where('estado', 1)->orWhere('id', $get('prestamista_id')))
+                    ->searchable()
+                    ->getOptionLabelFromRecordUsing(
+                        fn($record) =>
+                        $record->dni . ' - ' . $record->primer_nombre . ' ' . $record->primer_apellido
+                    )
                     ->required(),
                 Textarea::make('descripcion')
                     ->default(null)
@@ -85,7 +93,7 @@ class PrestamosRelationManager extends RelationManager
                     ->date()
                     ->sortable(),
                 TextColumn::make('prestamista.dni')
-                    ->getStateUsing(function ($record){
+                    ->getStateUsing(function ($record) {
                         return $record->prestamista->dni . ' - ' . $record->prestamista->primer_nombre . ' ' . $record->prestamista->primer_apellido;
                     })
                     ->searchable(),
