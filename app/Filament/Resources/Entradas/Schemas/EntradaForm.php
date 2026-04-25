@@ -15,6 +15,7 @@ class EntradaForm
         return $schema
             ->components([
                 DatePicker::make('fecha')
+                    ->default(now())
                     ->required(),
                 Select::make('producto_id')
                     ->relationship('producto', 'nombre')

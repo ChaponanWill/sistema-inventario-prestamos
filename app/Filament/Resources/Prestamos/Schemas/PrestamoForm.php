@@ -16,6 +16,7 @@ class PrestamoForm
         return $schema
             ->components([
                 DatePicker::make('fecha_prestamo')
+                    ->default(now())
                     ->required(),
                 Select::make('producto_id')
                     ->relationship('producto', 'nombre')
