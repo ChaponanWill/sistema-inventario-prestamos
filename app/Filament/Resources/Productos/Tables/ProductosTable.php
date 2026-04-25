@@ -22,6 +22,8 @@ class ProductosTable
                     ->disk('public')
                     ->label('Imagen'),
                 TextColumn::make('cantidad')
+                        ->color(fn ($state) => $state <= 0 ? 'danger' : 'success')
+                    ->label('Disponibles')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('unidad.nombre_corto')
