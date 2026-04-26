@@ -16,6 +16,7 @@ class DevolucionsTable
         return $table
             ->columns([
                 TextColumn::make('prestamo.id')
+                    ->label('Código Prestamo')
                     ->searchable(),
                 TextColumn::make('cantidad_devuelta')
                     ->numeric()
@@ -24,8 +25,21 @@ class DevolucionsTable
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('fecha_devolucion')
-                    ->date()
+                    ->label('Fecha Devolución')
+                    // dmy
+                    ->date('d/m/Y')
                     ->sortable(),
+                // DNI prestamista
+                TextColumn::make('prestamo.prestamista.dni')
+                    ->label('DNI Prestamista')
+                    ->searchable(),
+                // primer nombre prestamista y primer apellido prestamista
+                TextColumn::make('prestamo.prestamista.primer_nombre')
+                    ->label('Nombre')
+                    ->searchable(),
+                TextColumn::make('prestamo.prestamista.primer_apellido')
+                    ->label('Apellido')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

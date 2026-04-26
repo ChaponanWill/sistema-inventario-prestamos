@@ -15,24 +15,15 @@ class DevolucionForm
         return $schema
             ->components([
                 Select::make('prestamo_id')
-                    ->label('Préstamo')
-                    ->placeholder('Buscar por código de préstamo o DNI del prestamista')
+                    ->label('Código de Préstamo')
+                    ->relationship('prestamo', 'id') // Relación con el modelo Prestamo
+                    ->placeholder('Buscar por código de préstamo')
                     ->searchable()
                     // La búsqueda debe incluir el ID del préstamo, el DNI del prestamista
-                    ->getSearchResultsUsing(function (string $search) {
-                        return \App\Models\Prestamo::query()
-                            ->where('id', 'like', "%{$search}%")
-                            ->orWhereHas('prestamista', function ($q) use ($search) {
-                                $q->where('dni', 'like', "%{$search}%");
-                            })
-                            ->get()
-                            ->mapWithKeys(fn($record) => [
-                                $record->id => 'Código: ' . $record->id . ' | ' .
-                                    $record->producto->nombre . ' (' . $record->cantidad . ')' .
-                                    ' | ' . $record->prestamista->dni .
-                                    ' (' . $record->prestamista->primer_nombre . ' ' . $record->prestamista->primer_apellido . ')'
-                            ]);
-                    })
+                    ->getOptionLabelFromRecordUsing(
+                        fn($record) =>
+                        'Código: ' .$record->id . ' | ' . $record->producto->nombre . ': ' . $record->producto->cantidad . ' | Prestamista: ' . $record->prestamista->dni. ', ' . $record->prestamista->primer_nombre . ' ' . $record->prestamista->primer_apellido
+                    )
                     ->preload()
                     ->required(),
                 TextInput::make('cantidad_devuelta')
