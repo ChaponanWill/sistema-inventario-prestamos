@@ -20,7 +20,7 @@ class EntradaResource extends Resource
 {
     protected static ?string $model = Entrada::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::PlusCircle;
 
     public static function form(Schema $schema): Schema
     {

@@ -19,8 +19,10 @@ use Filament\Tables\Table;
 class CategoriaResource extends Resource
 {
     protected static ?string $model = Categoria::class;
+    protected static ?string $navigationLabel = 'Categorías';
+    protected static ?string $pluralLabel = 'Categorías';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::ClipboardDocumentList;
 
     public static function form(Schema $schema): Schema
     {

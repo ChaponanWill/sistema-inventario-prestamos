@@ -19,8 +19,11 @@ use Filament\Tables\Table;
 class AreaResource extends Resource
 {
     protected static ?string $model = Area::class;
+    protected static ?string $navigationLabel = 'Áreas';
+    protected static ?string $pluralLabel = 'Áreas';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::BuildingOffice2;
 
     public static function form(Schema $schema): Schema
     {

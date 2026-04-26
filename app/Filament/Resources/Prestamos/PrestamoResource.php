@@ -20,7 +20,7 @@ class PrestamoResource extends Resource
 {
     protected static ?string $model = Prestamo::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::ArrowUpTray;
 
     public static function form(Schema $schema): Schema
     {
