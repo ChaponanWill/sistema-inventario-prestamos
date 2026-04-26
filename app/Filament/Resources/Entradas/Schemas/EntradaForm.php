@@ -19,6 +19,7 @@ class EntradaForm
                     ->required(),
                 Select::make('producto_id')
                     ->relationship('producto', 'nombre')
+                    ->preload()
                     ->searchable()
                     ->required(),
                 TextInput::make('cantidad')

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Prestamo extends Model
 {
@@ -15,5 +16,10 @@ class Prestamo extends Model
     // Relación de prestamista con Prestamo belongsTo
     public function prestamista():BelongsTo{
         return $this->belongsTo(Prestamista::class);
+    }
+
+    // Hasmany devoluciones
+    public function devolucions():HasMany{
+        return $this->hasMany(Devolucion::class);
     }
 }

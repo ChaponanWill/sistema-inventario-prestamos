@@ -28,9 +28,11 @@ class PrestamistaForm
                     ->default(1)
                     ->required(),
                 Select::make('area_id')
-                    ->relationship('area', 'nombre', fn(Builder $query, $get)=> 
+                    ->relationship('area', 'nombre', fn(Builder $query, $get)=>
                         $query->where('estado',1)->orWhere('id',($get('area_id')))
                     )
+                    ->searchable()
+                    ->preload()
                     ->required(),
             ]);
     }

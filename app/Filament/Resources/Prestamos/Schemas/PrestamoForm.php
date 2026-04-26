@@ -20,6 +20,7 @@ class PrestamoForm
                     ->required(),
                 Select::make('producto_id')
                     ->relationship('producto', 'nombre')
+                    ->preload()
                     ->searchable()
                     ->getOptionLabelFromRecordUsing(
                         fn($record) =>
@@ -54,12 +55,14 @@ class PrestamoForm
                 DatePicker::make('fecha_devolucion'),
                 // Solo prestamistas con activo 1
                 Select::make('prestamista_id')
+                    ->placeholder('Buscar por DNI del prestamista')
                     ->relationship('prestamista', 'dni', fn(Builder $query, $get) => $query->where('estado', 1)->orWhere('id', $get('prestamista_id')))
                     ->searchable()
                     ->getOptionLabelFromRecordUsing(
                         fn($record) =>
                         $record->dni . ' - ' . $record->primer_nombre . ' ' . $record->primer_apellido
                     )
+                    ->preload()
                     ->required(),
                 Textarea::make('descripcion')
                     ->default(null)
