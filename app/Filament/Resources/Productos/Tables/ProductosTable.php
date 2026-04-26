@@ -26,6 +26,19 @@ class ProductosTable
                     ->label('Disponibles')
                     ->numeric()
                     ->sortable(),
+                // Suma de entradas
+                TextColumn::make('entradas_sum_cantidad')
+                    ->sum('entradas', 'cantidad')
+                    ->label('Entradas')
+                    ->numeric()
+                    ->default(0)
+                    ->sortable(),
+                // Suma de cantidad prestada
+                // TextColumn::make('prestamos_sum_cantidad')
+                //     ->sum('prestamos', 'cantidad')
+                //     ->label('Prestados')
+                //     ->numeric()
+                //     ->sortable(),
                 TextColumn::make('unidad.nombre_corto')
                     ->searchable(),
                 TextColumn::make('categoria.nombre')
